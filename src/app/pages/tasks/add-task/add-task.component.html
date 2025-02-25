@@ -1,0 +1,108 @@
+
+<div class="content-block">
+    <div class="dx-card responsive-paddings" >
+        <div id="form-container">
+            <div class="container">
+                <div class="title mb-5">Create Task</div>
+                <div class=" task-card">
+                    
+                    <div class="card-body">
+                        <form>
+                            <div  class="row">
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Task Name<span class="text-danger">*</span></label>
+                                    <dx-text-box [inputAttr]="{ 'aria-label': 'TaskName' }">
+                                        <dx-validator>
+                                          <dxi-validation-rule
+                                            type="required"
+                                            message="Task Name is required"
+                                          ></dxi-validation-rule>
+                                        </dx-validator>
+                                      </dx-text-box>
+                                    
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Project<span class="text-danger">*</span></label>
+                                    <dx-select-box
+                                    [dataSource]="projectList"
+                                    [inputAttr]="{ 'aria-label': 'Project' }"
+                                    validationMessagePosition="left"
+                                  >
+                                    <dx-validator>
+                                      <dxi-validation-rule
+                                        type="required"
+                                        message="Project is required"
+                                      ></dxi-validation-rule>
+                                    </dx-validator>
+                                  </dx-select-box>
+                                </div>
+                            </div>
+                            <div  class="row">
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Priority<span class="text-danger">*</span></label>
+                                    <dx-select-box
+                                    [dataSource]="priorityList"
+                                    [inputAttr]="{ 'aria-label': 'Priority' }"
+                                    validationMessagePosition="left"
+                                  >
+                                    <dx-validator>
+                                      <dxi-validation-rule
+                                        type="required"
+                                        message="Priority is required"
+                                      ></dxi-validation-rule>
+                                    </dx-validator>
+                                  </dx-select-box>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Status<span class="text-danger">*</span></label>
+                                    <dx-select-box
+                                    [dataSource]="statusList"
+                                    [inputAttr]="{ 'aria-label': 'Status' }"
+                                    validationMessagePosition="left"
+                                  >
+                                    <dx-validator>
+                                      <dxi-validation-rule
+                                        type="required"
+                                        message="Status is required"
+                                      ></dxi-validation-rule>
+                                    </dx-validator>
+                                  </dx-select-box>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Description spanning both rows -->
+                                <div class="mb-3 col-md-6 d-flex flex-column">
+                                    <label class="form-label">Description<span class="text-danger">*</span></label>
+                                    <dx-text-area class="form-control h-100" 
+                                    placeholder="Enter task name" ></dx-text-area>
+                                </div>
+                            
+                                <!-- Start Date and End Date -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Start Date<span class="text-danger">*</span></label>
+                                        <dx-date-box type="datetime"></dx-date-box>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">End Date<span class="text-danger">*</span></label>
+                                        <dx-date-box type="datetime"></dx-date-box>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <dx-button text="Create Task" class="btn btn-primary"></dx-button>
+                <dx-button text="Clear" class="btn btn-secondary ms-3"></dx-button>
+            </div>            
+            
+        </div>
+        
+                
+    </div>
+</div>

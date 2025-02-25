@@ -1,0 +1,172 @@
+<div class="d-flex align-items-center justify-content-center">
+  <div class="container">
+    <input type="checkbox" id="flip" />
+    <div class="cover">
+      <div class="front">
+        <img src="../../../assets/images/frontImg.jpg" alt="" />
+        <div class="text">
+          <span class="text-1">Task Management System</span>
+          <span class="text-2">Let's get connected</span>
+        </div>
+      </div>
+      <div class="back">
+        <img
+          class="backImg"
+          src="../../../assets/images/frontImg1.jpg"
+          alt=""
+        />
+        <div class="text">
+          <span class="text-1"
+            >Complete miles of journey <br />
+            with one step</span
+          >
+          <span class="text-2">Let's get started</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+      <div class="form-content">
+        <div class="login-form">
+          <div class="title">Login</div>
+          <form action="#" [formGroup]="loginForm" (submit)="onSubmit($event)">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <dx-text-box
+                  autocomplete="off"
+                  placeholder="Enter your username"
+                  formControlName="username"
+                  style="width: 100%"
+                >
+                  <dx-validator>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Username is required"
+                    ></dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <dx-text-box
+                  placeholder="Enter your password"
+                  formControlName="password"
+                  style="width: 100%"
+                  [mode]="passwordMode"
+                >
+                  <dxi-button
+                    name="password"
+                    location="after"
+                    [options]="passwordButton"
+                  ></dxi-button>
+                  <dx-validator>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Password is required"
+                    ></dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+              </div>
+              <div class="text">
+                <a href="/#/reset-password">Forgot password?</a>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Login" />
+              </div>
+              <div class="text sign-up-text">
+                Don't have an account? <label for="flip">Sigup now</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="signup-form">
+          <div class="title">Signup</div>
+          <form
+            [formGroup]="registrationForm"
+            (submit)="onCreateAccountClick($event)"
+          >
+            <div class="">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <dx-text-box
+                  autocomplete="off"
+                  validationMessagePosition="left"
+                  placeholder="Enter your username"
+                  [inputAttr]="{ 'aria-label': 'Username' }"
+                  formControlName="username"
+                  style="width: 100%"
+                >
+                  <dx-validator>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Username is required"
+                    ></dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+              </div>
+              <!-- <div *ngIf="registrationForm.get('username')?.touched && registrationForm.get('username')?.invalid">
+                <small *ngIf="registrationForm.get('username')?.errors?.['required']" class="error">Username is required.</small>
+              </div> -->
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <dx-text-box
+                  autocomplete="off"
+                  placeholder="Enter your email"
+                  formControlName="email"
+                  style="width: 100%"
+                >
+                  <dx-validator>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Email is required"
+                    ></dxi-validation-rule>
+                    <dxi-validation-rule
+                      type="email"
+                      message="Email is invalid"
+                    ></dxi-validation-rule>
+                    <dxi-validation-rule
+                      type="async"
+                      message="Email is already registered"
+                      [validationCallback]="asyncValidation"
+                    >
+                    </dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+
+                <!-- <input type="text" placeholder="Enter your email" formControlName="email" required> -->
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <dx-text-box
+                  placeholder="Enter your password"
+                  formControlName="password"
+                  style="width: 100%"
+                  [mode]="passwordMode"
+                >
+                  <dxi-button
+                    name="password"
+                    location="after"
+                    [options]="passwordButton"
+                  ></dxi-button>
+                  <dx-validator>
+                    <dxi-validation-rule
+                      type="required"
+                      message="Password is required"
+                    ></dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+                <!-- <input type="password" placeholder="Enter your password" formControlName="password" required> -->
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Register" />
+              </div>
+              <div class="text sign-up-text">
+                Already have an account? <label for="flip">Login now</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
