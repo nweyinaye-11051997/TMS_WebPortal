@@ -1,70 +1,192 @@
-<h2 class="content-block">Tasks</h2>
+<h2 class="ml-4">
+  <img src="../../../assets/images/list.png" class="logo-img" />
+  <span class="ms-2">Task List</span>
+</h2>
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <div class="row mb-2 align-items-end">
+      <div class="col-5"></div>
+      <div class="col-2">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" [(ngModel)]="startDate" />
+      </div>
+      <div class="col-2">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" [(ngModel)]="endDate" />
+      </div>
+      <div class="col-3">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Input group example"
+            aria-describedby="btnGroupAddon"
+            placeholder="Search by keywords....."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearch()"
+          />
+          <div
+            class="input-group-text"
+            id="btnGroupAddon"
+            style="background-color: #2f539b; color: white"
+            (click)="onSearch()"
+          >
+            <i class="fa fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<dx-data-grid class="dx-card wide-card"
-  [dataSource]="dataSource"
-  [showBorders]="false"
-  [focusedRowEnabled]="true"
-  [focusedRowIndex]="0"
-  [columnAutoWidth]="true"
-  [columnHidingEnabled]="true">
+    <dx-data-grid
+      class="mt-3"
+      [dataSource]="dataSource"
+      [showBorders]="false"
+      [columnAutoWidth]="true"
+      [columnHidingEnabled]="true"
+      keyExpr="id"
+      [editing]="{
+        mode: 'row',
+        allowUpdating: true,
+        allowDeleting: true
+      }"
+      (onSaving)="onSaving($event)"
+    >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+      <dxi-column
+        dataField="taskName"
+        [width]="190"
+        caption="Task Name"
+        [hidingPriority]="8"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="projectID"
+        [width]="190"
+        caption="Project Name"
+        [hidingPriority]="8"
+      >
+        <dxo-lookup
+          [dataSource]="projectList"
+          valueExpr="value"
+          displayExpr="name"
+        >
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="priority" caption="Priority" [hidingPriority]="5">
+        <dxo-lookup
+          [dataSource]="priority"
+          valueExpr="value"
+          displayExpr="name"
+        >
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column
+        dataField="startDate"
+        caption="Start Date"
+        dataType="date"
+        [hidingPriority]="3"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="endDate"
+        caption="End Date"
+        dataType="date"
+        [hidingPriority]="4"
+      >
+      </dxi-column>
 
-  <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
-  <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxi-column dataField="description" caption="Description"> </dxi-column>
 
-  <dxi-column
-    dataField="Task_ID"
-    [width]="90"
-    [hidingPriority]="2">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Subject"
-    [width]="190"
-    caption="Subject"
-    [hidingPriority]="8">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Status"
-    caption="Status"
-    [hidingPriority]="6">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Priority"
-    caption="Priority"
-    [hidingPriority]="5">
-    <dxo-lookup
-      [dataSource]="priority"
-      valueExpr="value"
-      displayExpr="name">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column
-    dataField="ResponsibleEmployee.Employee_Full_Name"
-    caption="Assigned To"
-    [allowSorting]="false"
-    [hidingPriority]="7">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Start_Date"
-    caption="Start Date"
-    dataType="date"
-    [hidingPriority]="3">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Due_Date"
-    caption="Due Date"
-    dataType="date"
-    [hidingPriority]="4">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Priority"
-    caption="Priority"
-    name="Priority"
-    [hidingPriority]="1">
-  </dxi-column>
-  <dxi-column
-    dataField="Task_Completion"
-    caption="Completion"
-    [hidingPriority]="0">
-  </dxi-column>
-</dx-data-grid>
+      <dxi-column
+        dataField="status"
+        cellTemplate="statusTemplate"
+        caption="Status"
+        [allowSearch]="true"
+        [hidingPriority]="6"
+      >
+        <dxo-lookup
+          [dataSource]="statusList"
+          valueExpr="value"
+          displayExpr="name"
+        >
+        </dxo-lookup>
+      </dxi-column>
+
+      <div *dxTemplate="let data of 'statusTemplate'">
+        <dx-progress-bar
+          #progressBar
+          id="progress-bar-status"
+          width="100%"
+          [elementAttr]="{ 'aria-label': 'Progress Bar' }"
+          [class.complete]="progressBar.value == 100"
+          [min]="0"
+          [max]="100"
+          [statusFormat]="format"
+          [value]="getStatusValue(data.data.status)"
+        >
+        </dx-progress-bar>
+        <!-- <label
+          ><img
+            [src]="getStatusClass(data.data.status)"
+            class="icon-img"
+          />&nbsp;{{ data.data.status }}</label
+        > -->
+        <!-- <dx-button
+          class="btn btn-sm btn-primary"
+          [ngClass]="getStatusClass(data.data.status)"
+        >
+          {{ data.data.status }}
+        </dx-button> -->
+      </div>
+      <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+      <div *dxTemplate="let task of 'detail'">
+        <div *ngIf="task.data.assignTasks.length > 0">
+          <dx-data-grid
+            [dataSource]="task.data.assignTasks"
+            [showBorders]="true"
+            id="detail-table"
+            [editing]="{
+              mode: 'row',
+              allowUpdating: true,
+              allowDeleting: true
+            }"
+          >
+            <dxi-column
+              dataField="memberID"
+              caption="Assigned Member"
+            ></dxi-column>
+            <dxi-column
+              dataField="startDate"
+              caption="Start Date"
+              dataType="date"
+            ></dxi-column>
+            <dxi-column
+              dataField="dueDate"
+              caption="Due Date"
+              dataType="date"
+            ></dxi-column>
+            <dxi-column
+              dataField="duration"
+              caption="Duration"
+              [calculateCellValue]="formatDuration"
+            ></dxi-column>
+            <dxi-column
+              dataField="status"
+              caption="Progress"
+              [calculateCellValue]="formatProgress"
+            >
+              <dxo-lookup
+                [dataSource]="progress"
+                valueExpr="value"
+                displayExpr="name"
+              >
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="remark" caption="Remark"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

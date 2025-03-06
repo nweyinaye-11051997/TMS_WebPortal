@@ -76,3 +76,36 @@ body {
 }
 
 $side-panel-min-width: 60px;
+.dx-header-row > td[role="columnheader"] > div.dx-datagrid-text-content {
+  font-size: 15px;
+  font-weight: bold;
+}
+.dx-header-row > td[role="columnheader"] {
+  background-color: #363640;
+  color: white;
+}
+.dx-header-row > td[role="gridcell"] {
+  background-color: #363640;
+  color: white;
+}
+.dx-datagrid .dx-icon-edit {
+  color: black;
+}
+::ng-deep .complete .dx-progressbar-range {
+  background-color: green;
+}
+.dx-progressbar-container {
+  height: 10px;
+}
+
+#detail-table .dx-header-row > td[role="columnheader"] {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+#detail-table .dx-header-row > td[role="gridcell"] {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+#detail-table .dx-datagrid-content .dx-datagrid-table {
+  //border: 1px solid black;
+}

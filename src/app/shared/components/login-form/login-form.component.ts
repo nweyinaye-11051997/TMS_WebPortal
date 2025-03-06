@@ -91,6 +91,7 @@ export class LoginFormComponent {
             const email: string = user.username;
             this.authService._user = { email };
             localStorage.setItem('token', response.token);
+            localStorage.setItem('userId', response.userId);
             this.router.navigate(['/home']);
           } else {
             this.notificationService.showNotification('Login failed!', 'error');
@@ -131,21 +132,3 @@ export class LoginFormComponent {
     }
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-    ReactiveFormsModule,
-    DxToastModule,
-    DxValidatorModule,
-    DxTextBoxModule,
-    DxValidationSummaryModule,
-  ],
-
-  declarations: [LoginFormComponent],
-  exports: [LoginFormComponent],
-  providers: [provideHttpClient(withInterceptors([tokenInterceptor]))],
-})
-export class LoginFormModule {}

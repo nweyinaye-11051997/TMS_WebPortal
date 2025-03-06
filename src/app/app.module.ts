@@ -3,65 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {
-  SideNavOuterToolbarModule,
   SideNavInnerToolbarModule,
+  SideNavOuterToolbarComponent,
+  SideNavOuterToolbarModule,
   SingleCardModule,
 } from './layouts';
-import {
-  FooterModule,
-  ResetPasswordFormModule,
-  CreateAccountFormModule,
-  ChangePasswordFormModule,
-  LoginFormModule,
-} from './shared/components';
+import { FooterModule } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import { AddTaskComponent } from './pages/tasks/add-task/add-task.component';
-import {
-  DxButtonModule,
-  DxDateBoxModule,
-  DxDropDownBoxModule,
-  DxFormComponent,
-  DxFormModule,
-  DxListModule,
-  DxSelectBoxModule,
-  DxTextAreaModule,
-  DxTextBoxModule,
-  DxToastModule,
-  DxTooltipModule,
-  DxValidatorModule,
-} from 'devextreme-angular';
-import dxDropDownBox from 'devextreme/ui/drop_down_box';
+import { DxFormModule } from 'devextreme-angular';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { tokenInterceptor } from './shared/services/token.interceptor';
+import { CommonModule } from '@angular/common';
+import { PagesModule } from './pages/pages.module';
+import { ShareModule } from './shared/share.module';
+import { HeaderModule } from './shared/components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, AddTaskComponent],
-  imports: [
-    BrowserModule,
-    SideNavOuterToolbarModule,
-    SideNavInnerToolbarModule,
-    SingleCardModule,
-    FooterModule,
-    ResetPasswordFormModule,
-    CreateAccountFormModule,
-    ChangePasswordFormModule,
-    LoginFormModule,
-    UnauthenticatedContentModule,
-    AppRoutingModule,
-    DxButtonModule,
-    DxSelectBoxModule,
-    DxTextAreaModule,
-    DxFormModule,
-    DxTooltipModule,
-    DxDateBoxModule,
-    DxTextBoxModule,
-    DxValidatorModule,
-    DxDropDownBoxModule,
-    DxListModule,
-    DxToastModule,
-  ],
+  declarations: [AppComponent],
   providers: [
     AuthService,
     ScreenService,
@@ -69,5 +29,33 @@ import { tokenInterceptor } from './shared/services/token.interceptor';
     provideHttpClient(withInterceptors([tokenInterceptor])),
   ],
   bootstrap: [AppComponent],
+  imports: [
+    PagesModule,
+    BrowserModule,
+    SingleCardModule,
+    FooterModule,
+    // ResetPasswordFormModule,
+    // CreateAccountFormModule,
+    // ChangePasswordFormModule,
+    ShareModule,
+    UnauthenticatedContentModule,
+    AppRoutingModule,
+    SideNavOuterToolbarModule,
+    SideNavInnerToolbarModule,
+    // DxButtonModule,
+    // DxSelectBoxModule,
+    // DxTextAreaModule,
+    DxFormModule,
+    // DxTooltipModule,
+    // DxDateBoxModule,
+    // DxTextBoxModule,
+    // DxValidatorModule,
+    // DxDropDownBoxModule,
+    // DxListModule,
+    // DxToastModule,
+    // ReactiveFormsModule,
+    CommonModule,
+    HeaderModule,
+  ],
 })
 export class AppModule {}

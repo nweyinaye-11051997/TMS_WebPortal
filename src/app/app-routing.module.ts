@@ -10,8 +10,15 @@ import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
-import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import {
+  DxDataGridModule,
+  DxDateBoxModule,
+  DxFormModule,
+  DxTextBoxModule,
+} from 'devextreme-angular';
 import { AddTaskComponent } from './pages/tasks/add-task/add-task.component';
+import { CommonModule } from '@angular/common';
+import { AssignTaskComponent } from './pages/tasks/assign-task/assign-task.component';
 
 const routes: Routes = [
   {
@@ -24,6 +31,12 @@ const routes: Routes = [
     component: AddTaskComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'assigntask',
+    component: AssignTaskComponent,
+    canActivate: [AuthGuardService],
+  },
+
   {
     path: 'profile',
     component: ProfileComponent,
@@ -63,11 +76,14 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { useHash: true }),
-    DxDataGridModule,
+
     DxFormModule,
+    CommonModule,
+    DxDateBoxModule,
+    DxTextBoxModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, ProfileComponent, TasksComponent],
+  declarations: [HomeComponent, ProfileComponent],
 })
 export class AppRoutingModule {}

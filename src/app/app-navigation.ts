@@ -2,17 +2,17 @@ export const navigation = [
   {
     text: 'Dashboard',
     path: '/home',
-    icon: 'dataarea'
-  }, 
+    icon: 'dataarea',
+  },
   {
     text: 'Member',
     icon: 'card',
     items: [
       {
         text: 'Create Member',
-        path: '/createmember'
+        path: '/createmember',
       },
-    ]
+    ],
   },
   {
     text: 'Project',
@@ -20,9 +20,9 @@ export const navigation = [
     items: [
       {
         text: 'Create Project',
-        path: '/createproject'
+        path: '/createproject',
       },
-    ]
+    ],
   },
   {
     text: 'Task',
@@ -30,17 +30,17 @@ export const navigation = [
     items: [
       {
         text: 'Create Task',
-        path: '/addtask'
+        path: '/addtask',
       },
       {
         text: 'Task List',
-        path: '/tasks'
+        path: '/tasks',
       },
       {
         text: 'Assign Task',
-        path: '/assigntask'
+        path: '/assigntask',
       },
-    ]
+    ],
   },
   {
     text: 'Report',
@@ -48,19 +48,17 @@ export const navigation = [
     items: [
       {
         text: 'Complete',
-        path: '/completereport'
-      }
-    ]
-  },
-  {
-    text: 'Setting',
-    icon: 'preferences',
-    items: [
-      {
-        text: 'Profile',
-        path: '/profile'
+        path: '/completereport',
       },
-      
-    ]
+    ],
   },
+  // {
+  //   text: 'Setting',
+  //   icon: 'preferences',
+  //   items: [
+  //     {
+  //       text: 'Profile',
+  //       path: '/profile',
+  //     }
+  // }
 ];

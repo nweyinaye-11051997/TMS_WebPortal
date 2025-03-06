@@ -11,6 +11,10 @@ export enum ResponseCode {
 export class TokenResponse {
   code: string = '';
   username: string = '';
+  userId: string = '';
   token: string = '';
   refreshToken: string = '';
+}
+export interface ListResponse<T> extends ResponseMessage {
+  responseList: T[]; // Equivalent to IEnumerable<T> in C#
 }

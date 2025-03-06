@@ -1,0 +1,20 @@
+.dx-card {
+  border-top: 4px solid #363640; /* Change to desired color */
+}
+.edit-link {
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.delete-link {
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+  text-decoration: underline;
+}

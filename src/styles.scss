@@ -1,5 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 .color-blue {
-    background-color: #2F539B;
-    
+  background-color: #2f539b;
+}
+
+.title {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+.title:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 25px;
+  background: rgb(3, 74, 125);
+}
+.title:before {
+  width: 20px;
+}
+.btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: rgb(3, 74, 125);
+  color: white;
+  border: none;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+  border: none;
+}
+.btn-warning {
+  background-color: orange;
+  color: white;
+  border: none;
+}
+.btn-info {
+  background-color: #3a833a;
+  color: white;
+  border: none;
+}
+.btn-success {
+  background-color: #175d72;
+  color: white;
+  border: none;
+}
+.ml-2 {
+  margin-left: 10px;
+}
+.icon-img {
+  width: 15px; /* Set desired width */
+  height: 15px; /* Set desired height */
+}
+label {
+  font-family: Roboto, RobotoFallback, "Noto Kufi Arabic", Helvetica, Arial,
+    sans-serif;
+}
+.logo-img {
+  width: 25px; /* Set desired width */
+  height: 25px; /* Set desired height */
+}
+.ml-4 {
+  margin-left: 40px;
 }
