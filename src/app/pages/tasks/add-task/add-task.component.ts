@@ -7,6 +7,7 @@ import { ResponseCode, ResponseMessage } from '../../../model/responseMessage';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import {
   getTodayDate,
+  memberlist,
   priority,
   projectList,
   statusList,
@@ -21,6 +22,7 @@ export class AddTaskComponent {
   projectList = projectList;
   statusList = statusList;
   priority = priority;
+  memberlist = memberlist;
   //valueForEditableTextArea: string;
   taskcreateForm: FormGroup;
 

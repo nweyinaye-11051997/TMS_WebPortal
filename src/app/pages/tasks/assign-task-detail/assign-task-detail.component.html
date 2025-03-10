@@ -1,1 +1,41 @@
-<p>assign-task-detail works!</p>
+<dx-data-grid
+  [dataSource]="assignTasks"
+  [showBorders]="true"
+  id="detail-table"
+  keyExpr="id"
+  [editing]="{
+    mode: 'row',
+    allowUpdating: true,
+    allowDeleting: false
+  }"
+  (onSaving)="onSaving($event)"
+>
+  <dxi-column dataField="memberID" caption="Assigned Member">
+    <dxo-lookup [dataSource]="memberlist" valueExpr="value" displayExpr="name">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column
+    dataField="startDate"
+    caption="Start Date"
+    dataType="date"
+  ></dxi-column>
+  <dxi-column
+    dataField="dueDate"
+    caption="Due Date"
+    dataType="date"
+  ></dxi-column>
+  <dxi-column
+    dataField="duration"
+    caption="Duration"
+    [calculateCellValue]="formatDuration"
+  ></dxi-column>
+  <dxi-column
+    dataField="status"
+    caption="Progress"
+    [calculateCellValue]="formatProgress"
+  >
+    <dxo-lookup [dataSource]="progress" valueExpr="value" displayExpr="name">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="remark" caption="Remark"></dxi-column>
+</dx-data-grid>

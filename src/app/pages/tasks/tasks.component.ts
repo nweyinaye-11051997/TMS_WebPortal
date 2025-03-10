@@ -68,7 +68,7 @@ export class TasksComponent implements OnInit {
         task.startDate.includes(this.startDate) ||
         task.endDate.includes(this.endDate)
     );
-    this.dataSource = this.dataSourceResult.filter(
+    this.dataSource = this.dataSource.filter(
       (task) =>
         task.taskName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         //task.projectID.toLowerCase().includes(this.searchTerm.toLowerCase()) ||

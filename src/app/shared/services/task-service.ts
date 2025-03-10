@@ -40,4 +40,10 @@ export class TaskService {
       task
     );
   }
+  updateAssignTask(task: any) {
+    return this.http.post<ResponseMessage>(
+      this.baseUrl + '/Task/updateAssignTask',
+      task
+    );
+  }
 }

@@ -142,49 +142,9 @@
       <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
       <div *dxTemplate="let task of 'detail'">
         <div *ngIf="task.data.assignTasks.length > 0">
-          <dx-data-grid
-            [dataSource]="task.data.assignTasks"
-            [showBorders]="true"
-            id="detail-table"
-            [editing]="{
-              mode: 'row',
-              allowUpdating: true,
-              allowDeleting: true
-            }"
-          >
-            <dxi-column
-              dataField="memberID"
-              caption="Assigned Member"
-            ></dxi-column>
-            <dxi-column
-              dataField="startDate"
-              caption="Start Date"
-              dataType="date"
-            ></dxi-column>
-            <dxi-column
-              dataField="dueDate"
-              caption="Due Date"
-              dataType="date"
-            ></dxi-column>
-            <dxi-column
-              dataField="duration"
-              caption="Duration"
-              [calculateCellValue]="formatDuration"
-            ></dxi-column>
-            <dxi-column
-              dataField="status"
-              caption="Progress"
-              [calculateCellValue]="formatProgress"
-            >
-              <dxo-lookup
-                [dataSource]="progress"
-                valueExpr="value"
-                displayExpr="name"
-              >
-              </dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="remark" caption="Remark"></dxi-column>
-          </dx-data-grid>
+          <app-assign-task-detail
+            [assignTasks]="task.data.assignTasks"
+          ></app-assign-task-detail>
         </div>
       </div>
     </dx-data-grid>

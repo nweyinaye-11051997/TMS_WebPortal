@@ -39,10 +39,10 @@
                   >
                     <option value="" selected>Select</option>
                     <option
-                      *ngFor="let project of memberlist"
-                      [value]="project"
+                      *ngFor="let member of memberlist"
+                      [value]="member.value"
                     >
-                      {{ project }}
+                      {{ member.name }}
                     </option>
                   </select>
                   <div class="invalid-feedback">Project is required</div>

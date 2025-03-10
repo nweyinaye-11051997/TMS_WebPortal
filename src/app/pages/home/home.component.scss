@@ -1,34 +1,25 @@
-.logos-container {
-  margin: 20px 0 40px 0;
-  text-align: center;
-  svg {
-    display: inline-block;
-  }
-}
-
-.devextreme-logo {
+.box {
+  background: rgb(228, 228, 228);
+  padding: 20px;
   width: 200px;
-  height: 34px;
-  margin-bottom: 13px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(13, 13, 13, 0.1);
+  margin: 10px;
 }
-
-.angular-logo {
-  width: 220px;
-  height: 62px;
+.title {
+  font-weight: bold;
+  //color: #333;
+  margin-bottom: 10px;
 }
-
-.plus {
-  margin: 15px 10px;
-  width: 22px;
-  height: 22px;
+.status {
+  font-size: 24px;
+  font-weight: bold;
 }
-
-:host-context(.screen-x-small) .logos-container {
-  svg {
-    width: 100%;
-    display: block;
-    &.plus {
-      margin: 0;
-    }
-  }
+.complete {
+  background-color: green;
+  color: white;
+}
+.progress1 {
+  background-color: #ff5722;
+  color: white;
 }

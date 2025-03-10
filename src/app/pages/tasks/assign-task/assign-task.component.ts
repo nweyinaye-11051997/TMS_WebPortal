@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { calculateDuration, getTodayDate } from 'src/app/common/GeneralUtil';
+import {
+  calculateDuration,
+  getTodayDate,
+  memberlist,
+} from 'src/app/common/GeneralUtil';
 import {
   ListResponse,
   ResponseCode,
   ResponseMessage,
 } from 'src/app/model/responseMessage';
 import { AssignTaskEntity, TaskEntity } from 'src/app/model/TaskEntity';
+import { AssignTaskService } from 'src/app/shared/services/assign-task.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { TaskService } from 'src/app/shared/services/task-service';
 @Component({
@@ -17,12 +22,13 @@ import { TaskService } from 'src/app/shared/services/task-service';
 export class AssignTaskComponent {
   assigntaskForm: FormGroup;
   //tasklist = ['Not Start', 'Progress', 'Complete'];
-  memberlist = ['Nwe Yin Aye', 'Shwe Yi', 'Chu K Khaing'];
+  memberlist = memberlist;
   tasklist: TaskEntity[] = [];
   isDisabled: boolean = true;
   public constructor(
     private fb: FormBuilder,
     private taskservice: TaskService,
+    private assignTaskservice: AssignTaskService,
     private notificationService: NotificationService
   ) {
     this.assigntaskForm = this.fb.group({
@@ -55,8 +61,9 @@ export class AssignTaskComponent {
     if (task.DueDate) {
       task.DueDate = new Date(task.DueDate).toISOString();
     }
+    task.Status = 0;
     if (this.assigntaskForm.valid) {
-      await this.taskservice.assignTask(task).subscribe({
+      await this.assignTaskservice.assignTask(task).subscribe({
         next: (response: ResponseMessage) => {
           if (response.code === ResponseCode.success) {
             this.notificationService.showNotification(

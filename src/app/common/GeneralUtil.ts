@@ -37,3 +37,9 @@ export const progress = [
   { name: '50 %', value: 50 },
   { name: '90 %', value: 90 },
 ];
+export const memberlist = [
+  { name: 'Nwe Yin Aye', value: 'Nwe Yin Aye' },
+  { name: 'Aye Myat Thu', value: 'Aye Myat Thu' },
+  { name: 'Su Darli Aung', value: 'Su Darli Aung' },
+  { name: 'Heing Min Lwin', value: 'Heing Min Lwin' },
+];
