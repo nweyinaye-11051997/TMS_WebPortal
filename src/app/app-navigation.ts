@@ -14,16 +14,16 @@ export const navigation = [
   //     },
   //   ],
   // },
-  // {
-  //   text: 'Project',
-  //   icon: 'taskhelpneeded',
-  //   items: [
-  //     {
-  //       text: 'Create Project',
-  //       path: '/createproject',
-  //     },
-  //   ],
-  // },
+  {
+    text: 'Project',
+    icon: 'taskhelpneeded',
+    items: [
+      {
+        text: 'Create Project',
+        path: '/createproject',
+      },
+    ],
+  },
   {
     text: 'Task',
     icon: 'taskcomplete',

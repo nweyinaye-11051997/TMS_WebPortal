@@ -11,6 +11,8 @@ import {
   statusList,
 } from 'src/app/common/GeneralUtil';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ProjectEntity } from 'src/app/model/ProjectModel';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   templateUrl: 'tasks.component.html',
@@ -18,21 +20,31 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 })
 export class TasksComponent implements OnInit {
   searchTerm: string = '';
-  projectList = projectList;
   statusList = statusList;
   priority = priority;
   progress = progress;
   dataSource: TaskEntity[] = [];
   dataSourceResult: TaskEntity[] = [];
+  projectList: ProjectEntity[] = [];
 
   startDate: string = getTodayDate();
   endDate: string = getTodayDate();
   constructor(
     private taskservice: TaskService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private projectservice: ProjectService
   ) {}
   ngOnInit(): void {
     this.getAllTasks();
+    this.getAllProject();
+  }
+  async getAllProject() {
+    this.projectservice
+      .getProjectList()
+      .subscribe((item: ListResponse<ProjectEntity>) => {
+        console.log(item.responseList);
+        this.projectList = item.responseList;
+      });
   }
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
@@ -80,7 +92,7 @@ export class TasksComponent implements OnInit {
         p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       let pj = this.projectList.find((p) =>
-        p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        p.projectName.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       if (data) {
         this.dataSource = this.dataSourceResult.filter(
@@ -89,7 +101,7 @@ export class TasksComponent implements OnInit {
       }
       if (pj) {
         this.dataSource = this.dataSourceResult.filter((task) =>
-          task.projectID.toLowerCase().includes(pj!.value.toLowerCase())
+          task.projectID.toLowerCase().includes(pj!.id.toLowerCase())
         );
       }
     }

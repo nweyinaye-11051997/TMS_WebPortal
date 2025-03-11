@@ -43,3 +43,15 @@ export const memberlist = [
   { name: 'Su Darli Aung', value: 'Su Darli Aung' },
   { name: 'Heing Min Lwin', value: 'Heing Min Lwin' },
 ];
+export const pjmanagerlist = [
+  { name: 'Nwe Yin Aye', value: 'Nwe Yin Aye' },
+  { name: 'Aye Myat Thu', value: 'Aye Myat Thu' },
+  { name: 'Su Darli Aung', value: 'Su Darli Aung' },
+  { name: 'Heing Min Lwin', value: 'Heing Min Lwin' },
+];
+export const categorylist = [
+  { name: 'Web', value: 'Web' },
+  { name: 'Mobile', value: 'Mobile' },
+  { name: 'Android', value: 'Android' },
+  { name: 'Frontend', value: 'Frontend' },
+];

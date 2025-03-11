@@ -1,6 +1,6 @@
 <h2 class="ml-4">
   <img src="../../../assets/images/plus.png" class="logo-img" />
-  <span class="ms-2">Create Task</span>
+  <span class="ms-2">Create Project</span>
 </h2>
 <div class="content-block">
   <div class="dx-card responsive-paddings">
@@ -9,36 +9,35 @@
         <div class="title mb-5">Enter Information</div>
         <div class="task-card">
           <div class="card-body">
-            <form [formGroup]="taskcreateForm">
+            <form [formGroup]="this.createForm">
               <div class="row">
                 <div class="mb-3 col-6">
                   <label class="form-label"
-                    >Task Name<span class="text-danger">*</span></label
+                    >Project Name<span class="text-danger">*</span></label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="TaskName"
-                    aria-label="TaskName"
+                    formControlName="ProjectName"
                     required
                   />
-                  <div class="invalid-feedback">Task Name is required</div>
+                  <div class="invalid-feedback">Project Name is required</div>
                 </div>
                 <div class="mb-3 col-6">
                   <label class="form-label"
-                    >Project<span class="text-danger">*</span></label
+                    >Project Manager<span class="text-danger">*</span></label
                   >
                   <select
                     class="form-select"
-                    formControlName="ProjectID"
                     aria-label="Project"
                     required
+                    formControlName="ProjectManager"
                   >
                     <option
-                      *ngFor="let project of projectList"
-                      [value]="project.id"
+                      *ngFor="let project of pjmanagerlist"
+                      [value]="project.value"
                     >
-                      {{ project.projectName }}
+                      {{ project.name }}
                     </option>
                   </select>
                   <div class="invalid-feedback">Project is required</div>
@@ -47,22 +46,23 @@
               <div class="row">
                 <div class="mb-3 col-6">
                   <label class="form-label"
-                    >Priority<span class="text-danger">*</span></label
+                    >Category<span class="text-danger">*</span></label
                   >
                   <select
                     class="form-select"
-                    formControlName="Priority"
                     aria-label="Priority"
                     required
+                    formControlName="Category"
                   >
                     <option
-                      *ngFor="let priority of priority"
-                      [value]="priority.value"
+                      *ngFor="let category of categorylist"
+                      [value]="category.value"
+                      formControlName="Category"
                     >
-                      {{ priority.name }}
+                      {{ category.name }}
                     </option>
                   </select>
-                  <div class="invalid-feedback">Priority is required</div>
+                  <div class="invalid-feedback">Category is required</div>
                 </div>
                 <div class="mb-3 col-6">
                   <label class="form-label"
@@ -77,6 +77,7 @@
                     <option
                       *ngFor="let status of statusList"
                       [value]="status.value"
+                      formControlName="Status"
                     >
                       {{ status.name }}
                     </option>
@@ -86,13 +87,12 @@
               </div>
               <div class="row">
                 <div class="mb-3 col-md-6 d-flex flex-column">
-                  <label class="form-label">Description</label>
+                  <label class="form-label">Remark</label>
                   <textarea
                     class="form-control h-100"
-                    formControlName="Description"
                     required
+                    formControlName="Remark"
                   ></textarea>
-                  <div class="invalid-feedback">Description is required</div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
@@ -102,8 +102,8 @@
                     <input
                       type="date"
                       class="form-control"
-                      formControlName="StartDate"
                       required
+                      formControlName="StartDate"
                     />
                     <div class="invalid-feedback">Start Date is required</div>
                   </div>
@@ -114,8 +114,8 @@
                     <input
                       type="date"
                       class="form-control"
-                      formControlName="EndDate"
                       required
+                      formControlName="EndDate"
                     />
                     <div class="invalid-feedback">End Date is required</div>
                   </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="d-flex justify-content-center mt-5">
         <dx-button
-          text="Create Task"
+          text="Create Project"
           class="btn btn-primary"
           (onClick)="onCreateTask()"
         ></dx-button>

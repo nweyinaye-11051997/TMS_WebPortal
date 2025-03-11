@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DxCheckBoxTypes } from 'devextreme-angular/ui/check-box';
 import { TaskEntity } from '../../../model/TaskEntity';
 import { TaskService } from 'src/app/shared/services/task-service';
-import { ResponseCode, ResponseMessage } from '../../../model/responseMessage';
+import {
+  ListResponse,
+  ResponseCode,
+  ResponseMessage,
+} from '../../../model/responseMessage';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import {
   getTodayDate,
@@ -12,14 +16,16 @@ import {
   projectList,
   statusList,
 } from 'src/app/common/GeneralUtil';
+import { ProjectService } from 'src/app/shared/services/project.service';
+import { ProjectEntity } from 'src/app/model/ProjectModel';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
 })
-export class AddTaskComponent {
-  projectList = projectList;
+export class AddTaskComponent implements OnInit {
+  projectList: ProjectEntity[] = [];
   statusList = statusList;
   priority = priority;
   memberlist = memberlist;
@@ -36,7 +42,8 @@ export class AddTaskComponent {
   public constructor(
     private fb: FormBuilder,
     private taskservice: TaskService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private projectservice: ProjectService
   ) {
     this.taskcreateForm = this.fb.group({
       TaskName: ['', [Validators.required]],
@@ -47,6 +54,9 @@ export class AddTaskComponent {
       StartDate: [getTodayDate(), [Validators.required]],
       EndDate: [getTodayDate(), [Validators.required]],
     });
+  }
+  ngOnInit(): void {
+    this.GetAllProject();
   }
 
   async onCreateTask() {
@@ -85,6 +95,14 @@ export class AddTaskComponent {
         },
       });
     }
+  }
+  async GetAllProject() {
+    this.projectservice
+      .getProjectList()
+      .subscribe((item: ListResponse<ProjectEntity>) => {
+        console.log(item.responseList);
+        this.projectList = item.responseList;
+      });
   }
 
   clearData() {

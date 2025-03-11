@@ -7,6 +7,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignTaskComponent } from './tasks/assign-task/assign-task.component';
 import { AssignTaskDetailComponent } from './tasks/assign-task-detail/assign-task-detail.component';
+import { CreateProjectComponent } from './project/create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AssignTaskDetailComponent } from './tasks/assign-task-detail/assign-tas
     AddTaskComponent,
     AssignTaskComponent,
     AssignTaskDetailComponent,
+    CreateProjectComponent,
   ],
   imports: [
     CommonModule,

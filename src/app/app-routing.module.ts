@@ -19,6 +19,7 @@ import {
 import { AddTaskComponent } from './pages/tasks/add-task/add-task.component';
 import { CommonModule } from '@angular/common';
 import { AssignTaskComponent } from './pages/tasks/assign-task/assign-task.component';
+import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
   {
     path: 'change-password/:recoveryCode',
     component: ChangePasswordFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'createproject',
+    component: CreateProjectComponent,
     canActivate: [AuthGuardService],
   },
   {
