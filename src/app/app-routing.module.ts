@@ -20,6 +20,7 @@ import { AddTaskComponent } from './pages/tasks/add-task/add-task.component';
 import { CommonModule } from '@angular/common';
 import { AssignTaskComponent } from './pages/tasks/assign-task/assign-task.component';
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
+import { ProjectListComponent } from './pages/project/project-list/project-list.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'createproject',
     component: CreateProjectComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'project-list',
+    component: ProjectListComponent,
     canActivate: [AuthGuardService],
   },
   {

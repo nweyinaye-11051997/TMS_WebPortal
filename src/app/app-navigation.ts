@@ -22,6 +22,10 @@ export const navigation = [
         text: 'Create Project',
         path: '/createproject',
       },
+      {
+        text: 'Project List',
+        path: '/project-list',
+      },
     ],
   },
   {
