@@ -1,6 +1,6 @@
 <h2 class="ml-4">
   <img src="../../../assets/images/list.png" class="logo-img" />
-  <span class="ms-2">Task List</span>
+  <span class="ms-2">Project List</span>
 </h2>
 <div class="content-block">
   <div class="dx-card responsive-paddings">
@@ -22,11 +22,14 @@
             aria-label="Input group example"
             aria-describedby="btnGroupAddon"
             placeholder="Search by keywords....."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearch()"
           />
           <div
             class="input-group-text"
             id="btnGroupAddon"
             style="background-color: #2f539b; color: white"
+            (click)="onSearch()"
           >
             <i class="fa fa-search"></i>
           </div>

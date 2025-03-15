@@ -41,11 +41,11 @@ export class CreateProjectComponent implements OnInit {
     const project: ProjectEntity = this.createForm.value;
     project.createdBy = localStorage.getItem('userId');
     project.updatedBy = localStorage.getItem('userId');
-    if (project.StartDate) {
-      project.StartDate = new Date(project.StartDate).toISOString(); // Convert to ISO format
+    if (project.startDate) {
+      project.startDate = new Date(project.startDate).toISOString(); // Convert to ISO format
     }
-    if (project.EndDate) {
-      project.EndDate = new Date(project.EndDate).toISOString();
+    if (project.endDate) {
+      project.endDate = new Date(project.endDate).toISOString();
     }
     if (this.createForm.valid) {
       await this.projectService.createProject(project).subscribe({

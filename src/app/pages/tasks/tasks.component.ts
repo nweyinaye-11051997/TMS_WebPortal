@@ -7,7 +7,6 @@ import {
   getTodayDate,
   priority,
   progress,
-  projectList,
   statusList,
 } from 'src/app/common/GeneralUtil';
 import { NotificationService } from 'src/app/shared/services/notification.service';
