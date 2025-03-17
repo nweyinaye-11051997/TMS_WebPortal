@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { memberlist, progress } from 'src/app/common/GeneralUtil';
-import { ResponseMessage } from 'src/app/model/responseMessage';
+import { ResponseCode, ResponseMessage } from 'src/app/model/responseMessage';
 import { AssignTaskEntity, TaskEntity } from 'src/app/model/TaskEntity';
 import { AssignTaskService } from 'src/app/shared/services/assign-task.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -43,13 +43,22 @@ export class AssignTaskDetailComponent {
     if (type === 'update') {
       await this.service.updateTask(e).subscribe({
         next: (response: ResponseMessage) => {
-          this.notificationService.showNotification(
-            response.description,
-            'success'
-          );
-          this.assignUpdated.emit(this.assignTasks[0].taskID);
+          if (response.code === ResponseCode.success) {
+            this.notificationService.showNotification(
+              response.description,
+              'success'
+            );
+            this.assignUpdated.emit(this.assignTasks[0].taskID);
+          } else {
+            this.notificationService.showNotification(
+              response.description,
+              'error'
+            );
+          }
         },
-        error: (error) => {},
+        error: (error) => {
+          this.notificationService.showNotification(error, 'error');
+        },
       });
     } else if (type === 'remove') {
       // await this.service.deleteTask(e).subscribe({

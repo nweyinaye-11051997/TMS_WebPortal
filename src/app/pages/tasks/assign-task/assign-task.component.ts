@@ -80,10 +80,7 @@ export class AssignTaskComponent {
           }
         },
         error: (error) => {
-          this.notificationService.showNotification(
-            'Task create failed!',
-            'error'
-          );
+          this.notificationService.showNotification(error, 'error');
         },
       });
     }
