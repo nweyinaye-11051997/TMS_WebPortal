@@ -30,7 +30,7 @@
                 </div>
                 <div class="mb-3 col-6">
                   <label class="form-label"
-                    >Member<span class="text-danger">*</span></label
+                    >Assign To<span class="text-danger">*</span></label
                   >
                   <select
                     class="form-select"
@@ -45,7 +45,7 @@
                       {{ member.name }}
                     </option>
                   </select>
-                  <div class="invalid-feedback">Project is required</div>
+                  <div class="invalid-feedback">Assign To is required</div>
                 </div>
               </div>
               <div class="row mb-3">
@@ -99,17 +99,25 @@
                       [disabled]="isDisabled"
                     />
                   </div>
-                  <!-- <div class="mt-4">
-                    <div class="d-flex justify-content-end">
-                      <label for="formFileMultiple" class="form-label"></label>
-                      <input
-                        class="form-control"
-                        type="file"
-                        id="formFileMultiple"
-                        multiple
-                      />
-                    </div>
-                  </div> -->
+                  <div class="mb-3">
+                    <label class="form-label"
+                      >Progress<span class="text-danger">*</span></label
+                    >
+                    <select
+                      class="form-select"
+                      formControlName="Progress"
+                      required
+                    >
+                      <option value="" selected>Select</option>
+                      <option
+                        *ngFor="let progress of progress"
+                        [value]="progress.value"
+                      >
+                        {{ progress.name }}
+                      </option>
+                    </select>
+                    <div class="invalid-feedback">Progress is required</div>
+                  </div>
                 </div>
               </div>
             </form>

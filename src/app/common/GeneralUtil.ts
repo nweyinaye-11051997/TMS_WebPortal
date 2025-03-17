@@ -35,7 +35,8 @@ export const progress = [
   { name: '0 %', value: 0 },
   { name: '40 %', value: 40 },
   { name: '50 %', value: 50 },
-  { name: '90 %', value: 90 },
+  { name: '80 %', value: 80 },
+  { name: '100 %', value: 100 },
 ];
 export const memberlist = [
   { name: 'Nwe Yin Aye', value: 'Nwe Yin Aye' },
@@ -54,4 +55,9 @@ export const categorylist = [
   { name: 'Mobile', value: 'Mobile' },
   { name: 'Android', value: 'Android' },
   { name: 'Frontend', value: 'Frontend' },
+];
+export const reviewers = [
+  { name: 'Myo Myo Cho', value: 'Myo Myo Cho' },
+  { name: 'Phu Kyaw Win', value: 'Phu Kyaw Win' },
+  { name: 'Thu Ya Aung', value: 'Thu Ya Aung' },
 ];

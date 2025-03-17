@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { memberlist, progress } from 'src/app/common/GeneralUtil';
 import { ResponseMessage } from 'src/app/model/responseMessage';
 import { AssignTaskEntity, TaskEntity } from 'src/app/model/TaskEntity';
 import { AssignTaskService } from 'src/app/shared/services/assign-task.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { TaskService } from 'src/app/shared/services/task-service';
 
 @Component({
   selector: 'app-assign-task-detail',
@@ -14,6 +13,8 @@ import { TaskService } from 'src/app/shared/services/task-service';
 export class AssignTaskDetailComponent {
   progress = progress;
   @Input() assignTasks: AssignTaskEntity[] = [];
+  @Output() assignUpdated = new EventEmitter<string>();
+
   memberlist = memberlist;
   constructor(
     private service: AssignTaskService,
@@ -46,6 +47,7 @@ export class AssignTaskDetailComponent {
             response.description,
             'success'
           );
+          this.assignUpdated.emit(this.assignTasks[0].taskID);
         },
         error: (error) => {},
       });
@@ -65,6 +67,6 @@ export class AssignTaskDetailComponent {
     return rowData.duration + ' days';
   }
   formatProgress(rowData: any) {
-    return rowData.status;
+    return rowData.progress;
   }
 }

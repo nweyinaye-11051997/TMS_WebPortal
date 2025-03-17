@@ -104,6 +104,7 @@
         caption="Status"
         [allowSearch]="true"
         [hidingPriority]="6"
+        [allowEditing]="false"
       >
         <dxo-lookup
           [dataSource]="statusList"
@@ -123,7 +124,7 @@
           [min]="0"
           [max]="100"
           [statusFormat]="format"
-          [value]="getStatusValue(data.data.status)"
+          [value]="getTotalProgress(data.data)"
         >
         </dx-progress-bar>
         <!-- <label
@@ -144,6 +145,7 @@
         <div *ngIf="task.data.assignTasks.length > 0">
           <app-assign-task-detail
             [assignTasks]="task.data.assignTasks"
+            (assignUpdated)="updateTaskStatus($event)"
           ></app-assign-task-detail>
         </div>
       </div>

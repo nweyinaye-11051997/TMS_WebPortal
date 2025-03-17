@@ -4,6 +4,7 @@ import {
   calculateDuration,
   getTodayDate,
   memberlist,
+  progress,
 } from 'src/app/common/GeneralUtil';
 import {
   ListResponse,
@@ -21,7 +22,7 @@ import { TaskService } from 'src/app/shared/services/task-service';
 })
 export class AssignTaskComponent {
   assigntaskForm: FormGroup;
-  //tasklist = ['Not Start', 'Progress', 'Complete'];
+  progress = progress;
   memberlist = memberlist;
   tasklist: TaskEntity[] = [];
   isDisabled: boolean = true;
@@ -37,6 +38,7 @@ export class AssignTaskComponent {
       StartDate: [getTodayDate(), [Validators.required]],
       DueDate: [getTodayDate(), [Validators.required]],
       Duration: [1, [Validators.required]],
+      Progress: [0, [Validators.required]],
       Remark: [''],
     });
     this.getAllTasks();
@@ -61,7 +63,6 @@ export class AssignTaskComponent {
     if (task.DueDate) {
       task.DueDate = new Date(task.DueDate).toISOString();
     }
-    task.Status = 0;
     if (this.assigntaskForm.valid) {
       await this.assignTaskservice.assignTask(task).subscribe({
         next: (response: ResponseMessage) => {

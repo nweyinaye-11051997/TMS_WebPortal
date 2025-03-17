@@ -14,10 +14,10 @@ export class TaskEntity {
 }
 export class AssignTaskEntity {
   id: string = '';
-  TaskID: string = '';
+  taskID: string = '';
   MemberID: string = '';
   priority: number = 0;
-  Status: number = 0;
+  Progress: number = 0;
   Duration: number = 0;
   Remark: string = '';
   StartDate: string = '';

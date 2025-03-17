@@ -12,6 +12,7 @@ import {
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProjectEntity } from 'src/app/model/ProjectModel';
 import { ProjectService } from 'src/app/shared/services/project.service';
+import { reviewers } from '../../common/GeneralUtil';
 
 @Component({
   templateUrl: 'tasks.component.html',
@@ -22,10 +23,11 @@ export class TasksComponent implements OnInit {
   statusList = statusList;
   priority = priority;
   progress = progress;
+  reviewers = reviewers;
   dataSource: TaskEntity[] = [];
   dataSourceResult: TaskEntity[] = [];
   projectList: ProjectEntity[] = [];
-
+  status = 0;
   startDate: string = getTodayDate();
   endDate: string = getTodayDate();
   constructor(
@@ -136,15 +138,7 @@ export class TasksComponent implements OnInit {
     );
     const e = this.dataSourceResult.find((task) => task.id === key);
     if (type === 'update') {
-      await this.taskservice.updateTask(e).subscribe({
-        next: (response: ResponseMessage) => {
-          this.notificationService.showNotification(
-            response.description,
-            'success'
-          );
-        },
-        error: (error) => {},
-      });
+      this.updateTask(e);
     } else if (type === 'remove') {
       await this.taskservice.deleteTask(e).subscribe({
         next: (response: ResponseMessage) => {
@@ -162,5 +156,46 @@ export class TasksComponent implements OnInit {
   }
   formatProgress(rowData: any) {
     return rowData.status;
+  }
+  updateTaskStatus(id: string) {
+    const e = new TaskEntity();
+    var task = this.dataSourceResult.find((t) => t.id === id);
+    if (task) {
+      if (this.status == 0) {
+        task.status = 'Not start';
+      } else if (this.status == 100) {
+        task.status = 'Completed';
+      } else {
+        task.status = 'In Progress';
+      }
+      this.updateTask(task);
+    }
+  }
+  async updateTask(task: any) {
+    await this.taskservice.updateTask(task).subscribe({
+      next: (response: ResponseMessage) => {
+        this.notificationService.showNotification(
+          response.description,
+          'success'
+        );
+      },
+      error: (error) => {},
+    });
+  }
+  getTotalProgress(masterData: any): number {
+    if (
+      !masterData ||
+      !masterData.assignTasks ||
+      masterData.assignTasks.length === 0
+    ) {
+      return 0; // No progress if there are no details
+    }
+
+    let totalProgress = masterData.assignTasks.reduce(
+      (sum: number, detail: any) => sum + detail.progress,
+      0
+    );
+    this.status = Math.round(totalProgress / masterData.assignTasks.length); // Average progress
+    return this.status;
   }
 }
