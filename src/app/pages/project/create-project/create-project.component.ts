@@ -10,6 +10,7 @@ import {
 } from 'src/app/common/GeneralUtil';
 import { ResponseMessage, ResponseCode } from 'src/app/model/responseMessage';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { progress } from '../../../common/GeneralUtil';
 
 @Component({
   selector: 'app-create-project',
@@ -21,6 +22,7 @@ export class CreateProjectComponent implements OnInit {
   pjmanagerlist = pjmanagerlist;
   categorylist = categorylist;
   createForm: FormGroup;
+  progress = progress;
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,

@@ -75,11 +75,11 @@
                     required
                   >
                     <option
-                      *ngFor="let status of statusList"
-                      [value]="status.value"
+                      *ngFor="let progress of progress"
+                      [value]="progress.value"
                       formControlName="Status"
                     >
-                      {{ status.name }}
+                      {{ progress.name }}
                     </option>
                   </select>
                   <div class="invalid-feedback">Status is required</div>
