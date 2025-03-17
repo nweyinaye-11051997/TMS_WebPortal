@@ -12,10 +12,10 @@ import { ListResponse } from 'src/app/model/responseMessage';
 export class ProjectListComponent implements OnInit {
   startDate: string = getTodayDate();
   endDate: string = getTodayDate();
-  dataSourceResult : ProjectEntity[] = [];
+  dataSourceResult: ProjectEntity[] = [];
   dataSource: ProjectEntity[] = [];
   statusList = statusList;
-  searchTerm : string = '';
+  searchTerm: string = '';
   constructor(private projectservice: ProjectService) {}
   ngOnInit(): void {
     this.getAllProjectList();
@@ -31,26 +31,32 @@ export class ProjectListComponent implements OnInit {
   }
 
   onSearch() {
-    this.dataSource = this.dataSourceResult.filter(
-      (project) => {
-        const projectStartDate = new Date(project.startDate);
-        const projectEndDate = new Date(project.endDate);
-        
-        
-        const filterStartDate = new Date(this.startDate);
-        const filterEndDate = new Date(this.endDate);
+    this.dataSource = this.dataSourceResult.filter((project) => {
+      const projectStartDate = new Date(project.startDate);
+      const projectEndDate = new Date(project.endDate);
 
-        return (projectStartDate >= filterStartDate && projectStartDate <= filterEndDate) ||
-               (projectEndDate >= filterStartDate && projectEndDate <= filterEndDate) ||
-               (projectStartDate <= filterStartDate && projectEndDate >= filterEndDate);
-      }
-    
-    );
+      const filterStartDate = new Date(this.startDate);
+      const filterEndDate = new Date(this.endDate);
+
+      return (
+        (projectStartDate >= filterStartDate &&
+          projectStartDate <= filterEndDate) ||
+        (projectEndDate >= filterStartDate &&
+          projectEndDate <= filterEndDate) ||
+        (projectStartDate <= filterStartDate && projectEndDate >= filterEndDate)
+      );
+    });
     this.dataSource = this.dataSource.filter(
       (project) =>
-        project.projectName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        project.category.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        project.projectManager.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        project.projectName
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) ||
+        project.category
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) ||
+        project.projectManager
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) ||
         project.status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         //task.projectID.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         //task.Status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -72,21 +78,9 @@ export class ProjectListComponent implements OnInit {
     //     );
     //   }
     // }
-   // this.dataSource = this.dataSource.sort((a, b) => b.priority - a.priority);
+    // this.dataSource = this.dataSource.sort((a, b) => b.priority - a.priority);
   }
 
-  getStatusValue(status: string): number {
-    switch (status.toLowerCase()) {
-      case 'not start':
-        return 0; // Blue for Active
-      case 'progress':
-        return 50; // Red for Inactive
-      case 'complete':
-        return 100;
-      default:
-        return 0; // Gray for Other Statuses
-    }
-  }
   format(ratio: any) {
     return `progress: ${ratio * 100}%`;
   }
